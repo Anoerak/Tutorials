@@ -102,6 +102,8 @@ Finally, in order to avoid VSCode to indicate an eslint error on your new path, 
 }
 ````
 
+DON'T FORGET TO RESTART YOUR SERVER `npm start`for the changes to take effect!!!!
+
 That's it!!!
 
 You can now enjoy absolute paths with your React project :)
