@@ -47,7 +47,7 @@ npm install @craco/craco
 
 ### II. Craco.config.js
 
-You want to create a `craco.config.js` file at the root of your directory of your project and copy/paste this code:
+You want to create a `craco.config.js` file at the root of your project and copy/paste this code:
 
 ````javascript
 const path = require(`path`);
