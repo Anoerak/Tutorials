@@ -1,6 +1,6 @@
 # Absolute Path with React
 
-Aren't you tired of using relative path for your imports? Wasting time trying to understand the folders' structure of a project you're asked to work on? Spending too much time looking for a file?
+Aren't you tired of using relative path for your imports? Wasting time trying to understand the folders' structure of a project you've been asked to work on? Spending too much time looking for a file?
 
 ````javascript
 import React from 'react';
