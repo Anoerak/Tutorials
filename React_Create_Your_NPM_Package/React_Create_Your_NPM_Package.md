@@ -141,7 +141,12 @@ npm install --save-dev @babel/cli @babel/core @babel/preset-env @babel/preset-re
 You should now find the following dependencies in your `package.json` file (^_.\*\*._ stands for the version number):
 
 ```json
-
+	"devDependencies": {
+		"@babel/cli": "^7.22.6",
+		"@babel/core": "^7.22.8",
+		"@babel/preset-env": "^7.22.7",
+		"@babel/preset-react": "^7.22.5"
+	}
 ```
 
 `babel-cli` is a command line interface for Babel. It allows you to use Babel from the terminal and will also transpile your code to ES5
@@ -258,7 +263,7 @@ your terminal. You can now check your package on NPM. To do so, you need to run 
 npm view your_package_name
 ```
 
-You should see your package details displayed in your terminal.
+You should see your package details displayed in your terminal. ![npm view](Capture%20d'écran%202023-07-10%20154200.png)
 
 ### V. Publish your package on GitHub
 
