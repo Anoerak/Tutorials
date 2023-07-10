@@ -2,6 +2,10 @@
 	"name": "react_npm_modal",
 	"version": "0.1.0",
 	"private": false,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Anoerak/Tutorials.git"
+	},
 	"main": "dist/index.js",
 	"module": "dist/index.js",
 	"babel": {
@@ -22,6 +26,7 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "SET NODE_ENV=production && rm -rf dist && mkdir dist && npx babel src/YourComponent --out-dir dist --copy-files",
+		"deploy": "npm run build && gh-pages -b gh-pages -d dist && git add . && git commit -m \"deploy\" && git push origin main",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},
@@ -47,6 +52,7 @@
 		"@babel/cli": "^7.22.6",
 		"@babel/core": "^7.22.8",
 		"@babel/preset-env": "^7.22.7",
-		"@babel/preset-react": "^7.22.5"
+		"@babel/preset-react": "^7.22.5",
+		"gh-pages": "^5.0.0"
 	}
 }
