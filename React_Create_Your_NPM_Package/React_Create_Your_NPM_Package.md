@@ -235,7 +235,7 @@ Once you have entered them, you need to run the following command:
 npm whoami
 ```
 
-You should see your NPM username displayed in your terminal.
+You should see your NPM username displayed in your terminal.  
 ![NPM username](./react_npm_modal/img/Capture%20d'écran%202023-07-10%20162623.png)
 
 You can now publish your package.
