@@ -16,6 +16,10 @@ command is the easiest way to do it. You can find more information about it [her
 should setup your package with all the necessary dependencies as well as the `package.json` file. This is what your folder structure should
 look like:
 
+```bash
+npx create-react-app your_package_name
+```
+
 ```
 your_package_name
 ├── node_modules
@@ -188,7 +192,7 @@ Now that you have your package, you need to create a GitHub repository. You can 
 details about it [here](https://cli.github.com/manual/). Once you have your repository, you need to link it to your package. To do so, you
 need to go to your package folder and run the following commands:
 
-```
+```bash
 git init
 git add .
 git commit -m "first commit"
@@ -204,26 +208,32 @@ Now that you have your package and your GitHub repository, you need to create yo
 You can find more details about it [here](https://docs.npmjs.com/creating-a-new-npm-user-account). Once you have your account, you need to
 link it to your package. To do so, you need to go to your package folder and run the following commands:
 
-```
+```bash
 npm login
 ```
 
 You will be prompted to enter your NPM username, password and email. Once you have entered them, you need to run the following command:
 
-```
+```bash
 npm whoami
 ```
 
-You should see your NPM username displayed in your terminal. You can now publish your package.
+You should see your NPM username displayed in your terminal.
+![NPM username](./react_npm_modal/img/Capture%20d'écran%202023-07-10%20162623.png)
+
+You can now publish your package.
 
 ### IV. Publish your package on NPM
 
 Now that you have your package and your GitHub repository, you need to build then publish your package. To do so, you need to run the
 following command:
 
-```
+```bash
 npm run build
 ```
+
+A confirmation message should be displayed in your terminal.
+![Confirmation message](./react_npm_modal/img/Capture%20d'écran%202023-07-10%20162332.png)
 
 You should see a `dist` folder created in your package folder. Your folder structure should now look like this:
 
@@ -252,36 +262,51 @@ Although, the `index.js.map` file is not required and therefore might not be cre
 
 You can now publish your package. To do so, you need to run the following command:
 
-```
+```bash
 npm publish
 ```
 
 You'll be prompt to authorize the browser to open an authentication page. Once you have authorized it, you should see a success message in
 your terminal. You can now check your package on NPM. To do so, you need to run the following command:
 
-```
+```bash
 npm view your_package_name
 ```
 
-You should see your package details displayed in your terminal. ![npm view](Capture%20d'écran%202023-07-10%20154200.png)
+You should see your package details displayed in your terminal.
+![npm view](/React_Create_Your_NPM_Package/react_npm_modal/img/Capture%20d'écran%202023-07-10%20154200.png)
 
 ### V. Publish your package on GitHub
 
-Now that you have your package published on NPM, you can publish it on GitHub. To do so, you need to run the following commands:
+Now that you have your package published on NPM, you can publish it on GitHub.
+
+You first need to install the GitHub pages package. To do so, you need to run the following command:
+
+```bash
+npm install gh-pages --save-dev
+```
+
+Then, add your repository details to your `package.json` file. You need to add the following lines under the `private` field:
+
+```json
+"repository": {
+	"type": "git",
+	"url": "<your_repository_url>"
+},
 
 ```
-git add .
-git commit -m "publish package"
-git push -u origin main
-```
 
-You should see your package published on GitHub.
+Finally, you need to add the following lines under the `scripts` field:
+
+```json
+"deploy": "npm run build && gh-pages -b gh-pages -d dist && git add . && git commit -m \"deploy\" && git push origin main"
+```
 
 ### VI. Install your package
 
 Now that you have your package published, you can install it in any other project. To do so, you need to run the following command:
 
-```
+```bash
 npm install your_package_name
 ```
 
@@ -289,7 +314,7 @@ npm install your_package_name
 
 Now that you have your package installed, you can import it in any other project. To do so, you need to run the following command:
 
-```
+```javascript
 import YourComponent from 'your_package_name';
 ```
 
