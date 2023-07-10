@@ -9,12 +9,27 @@ skills, allowing you to learn from others and to help others learn from you and 
 
 ## How?
 
-### I. Create your package
+### I. Create your GitHub repository
 
-First of all, you need to create your package. You can do it manually or using the `create-react-app` command. Using the `create-react-app`
-command is the easiest way to do it. You can find more information about it [here](https://create-react-app.dev/docs/getting-started/). That
-should setup your package with all the necessary dependencies as well as the `package.json` file. This is what your folder structure should
-look like:
+First off, you need to create a GitHub repository. You can do it manually or using the GitHub CLI. You can find more details about it
+[here](https://cli.github.com/manual/). Once you have your repository, you need to link it to your package. To do so, you need to go to your
+package folder and run the following commands:
+
+```bash
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin your_github_username/your_repository_name
+git push -u origin main
+```
+
+### II. Create your package
+
+Now that you have your GitHub repo created, you need to create your package. You can do it manually or using the `create-react-app` command.
+Using the `create-react-app` command is the easiest way to do it. You can find more information about it
+[here](https://create-react-app.dev/docs/getting-started/). That should setup your package with all the necessary dependencies as well as
+the `package.json` file. This is what your folder structure should look like:
 
 ```bash
 npx create-react-app your_package_name
@@ -186,21 +201,6 @@ Finally, let us install all the dependencies we need to run our package. Run the
 npm i
 ```
 
-### II. Create your GitHub repository
-
-Now that you have your package, you need to create a GitHub repository. You can do it manually or using the GitHub CLI. You can find more
-details about it [here](https://cli.github.com/manual/). Once you have your repository, you need to link it to your package. To do so, you
-need to go to your package folder and run the following commands:
-
-```bash
-git init
-git add .
-git commit -m "first commit"
-git branch -M main
-git remote add origin your_github_username/your_repository_name
-git push -u origin main
-```
-
 ### III. Create your NPM account
 
 Now that you have your package and your GitHub repository, you need to create your NPM account. You can do it manually or using the NPM CLI.
@@ -258,7 +258,10 @@ your_package_name
 └── README.md
 ```
 
-Although, the `index.js.map` file is not required and therefore might not be created.
+Although the `index.js.map` file is not required and therefore might not be created.
+
+**!!!!! CHECK THE VERSION NUMBER IN YOUR PACKAGE.JSON FILE !!!!! YOU CANT PUBLISH A PACKAGE WITH A VERSION NUMBER THAT ALREADY EXISTS OR
+LOWER THAN THE PREVIOUS ONE !!!!!**
 
 You can now publish your package. To do so, you need to run the following command:
 
@@ -280,34 +283,71 @@ You should see your package details displayed in your terminal.
 
 Now that you have your package published on NPM, you can publish it on GitHub.
 
-You first need to install the GitHub pages package. To do so, you need to run the following command:
+First, we need to allow NPM to authenticate with GitHub. To do so, We'll create a personal access token. You can find more details about it
+[here](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token).
+you want to authorize your token to have control over the following scopes:
 
-```bash
-npm install gh-pages --save-dev
+```
+	-   repo
+	-   write:packages
+	-   read:packages
 ```
 
-Then, add your repository details to your `package.json` file. You need to add the following lines under the `private` field:
+Once you have created your token, you need to run the following command:
+
+```bash
+npm config set //npm.pkg.github.com/:_authToken <YOUR_TOKEN>
+```
+
+You need now to make some minor changes to your `package.json` file. You need to add the following lines under the `private` field:
 
 ```json
 "repository": {
-	"type": "git",
-	"url": "<your_repository_url>"
-},
-
+		"type": "git",
+		"url": "https://github.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPO_NAME>.git"
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/",
+		"access": "public"
+	},
 ```
 
-Finally, you need to add the following lines under the `scripts` field:
+You also need to change the `name` field to `@<YOUR_GITHUB_USERNAME>/<YOUR_PACKAGE_NAME>` (replace with your github username and the name
+you want to give to your package)
 
 ```json
-"deploy": "npm run build && gh-pages -b gh-pages -d dist && git add . && git commit -m \"deploy\" && git push origin main"
+"name": "@<YOUR_GITHUB_USERNAME>/<YOUR_PACKAGE_NAME>",
 ```
+
+**CHECK THE VERSION NUMBER IN YOUR PACKAGE.JSON FILE !!!!! YOU CANT PUBLISH A PACKAGE WITH A VERSION NUMBER THAT ALREADY EXISTS OR LOWER
+THAN THE PREVIOUS ONE !!!!!**
+
+You can now build and publish your package. To do so, you need to run the following command:
+
+```bash
+npm run build
+npm publish
+```
+
+You should see a success message in your terminal. ![Success message](./react_npm_modal/img/Capture%20d'écran%202023-07-10%20180512.png)
+
+You can now check your package on GitHub. To do so, you need to go to your GitHub Profile and click on the `packages` tab. You should see
+your package displayed. ![GitHub packages](./react_npm_modal/img/Capture%20d'écran%202023-07-10%20180702.png)
 
 ### VI. Install your package
 
 Now that you have your package published, you can install it in any other project. To do so, you need to run the following command:
 
+from NPM
+
 ```bash
 npm install your_package_name
+```
+
+from GitHub
+
+```bash
+npm install @<YOUR_GITHUB_USERNAME>/<YOUR_PACKAGE_NAME>
 ```
 
 ### VII. Import your package
