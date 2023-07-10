@@ -104,8 +104,78 @@ export default App;
 You can now run your package using the `npm start` command. You should see your component displayed in your browser. If everything is
 working fine, you should see the 'Hello World!' in red characters. You can now delete the `App.css`, `App.test.js`, `logo.svg`,
 `reportWebVitals.js` and `setupTests.js` files. You can also delete the `reportWebVitals` import in the `index.js` file and the call made at
-the bottom (`reportWebVitals()`). You can now add your own components in the `components` folder and import them in the `index.js` file. You
-can also add your own styles in the `index.css` file.
+the bottom (`reportWebVitals()`). This is what your folder structure should look like:
+
+```
+your_package_name
+├── node_modules
+├── public
+├── src
+│   ├── components
+│   │   ├── index.js
+│   │   └── index.css
+│   ├── App.js
+│   ├── index.css
+│   ├── index.js
+├── .gitignore
+├── package-lock.json
+├── package.json
+└── README.md
+```
+
+You can now add your own components in the `components` folder and import them in the `index.js` file. You can also add your own styles in
+the `index.css` file.
+
+### II. Modify your package.json file
+
+Now that you have your package, you need to modify your `package.json` file. You need to install some dependencies and modify some fields.
+
+#### 1. Install dependencies
+
+Run the following commands to install the dependencies:
+
+```bash
+npm install --save-dev @babel/cli @babel/core @babel/preset-env @babel/preset-react
+```
+
+You should now find the following dependencies in your `package.json` file (^_.\*\*._ stands for the version number):
+
+```json
+
+```
+
+`babel-cli` is a command line interface for Babel. It allows you to use Babel from the terminal and will also transpile your code to ES5
+(required by web browsers ). `babel-preset-env` is a smart preset that allows you to use the latest JavaScript without needing to
+micromanage which syntax transforms (and optionally, browser polyfills) are needed by your target environment(s). It is required by
+`babel-cli` to transpile your code from ES6 to ES5. `babel-preset-react` is a Babel preset for all React plugins required by `babel-cli` to
+understand how to convert React code to ES5.
+
+#### 2. Modify the package.json file
+
+First off, you need to modify your `build script` in the `scripts` field. You need to add the following line (!! REPLACE
+<Your_Component_Folder> WITH THE NAME OF YOUR COMPONENT FOLDER !!):
+
+```json
+"build": "SET NODE_ENV=production && rm -rf dist && mkdir dist && npx babel src/<Your_Component_Folder> --out-dir dist --copy-files"
+```
+
+Find the `private` field (should be the fourth line) and set it to `false` in order to be able to publish your package later on. Then, you
+need to add the following lines under the `private` field:
+
+```json
+"main": "dist/index.js",
+"module": "dist/index.js",
+"babel": {
+	"presets": ["@babel/preset-env", "@babel/preset-react"]
+},
+
+```
+
+Finally, let us install all the dependencies we need to run our package. Run the following command:
+
+```bash
+npm i
+```
 
 ### II. Create your GitHub repository
 
@@ -122,16 +192,87 @@ git remote add origin your_github_username/your_repository_name
 git push -u origin main
 ```
 
-### III. Publish your package
+### III. Create your NPM account
 
-Now that you have your package and your GitHub repository, you need to publish your package. To do so, you need to run the following
-command:
+Now that you have your package and your GitHub repository, you need to create your NPM account. You can do it manually or using the NPM CLI.
+
+You can find more details about it [here](https://docs.npmjs.com/creating-a-new-npm-user-account). Once you have your account, you need to
+link it to your package. To do so, you need to go to your package folder and run the following commands:
+
+```
+npm login
+```
+
+You will be prompted to enter your NPM username, password and email. Once you have entered them, you need to run the following command:
+
+```
+npm whoami
+```
+
+You should see your NPM username displayed in your terminal. You can now publish your package.
+
+### IV. Publish your package on NPM
+
+Now that you have your package and your GitHub repository, you need to build then publish your package. To do so, you need to run the
+following command:
+
+```
+npm run build
+```
+
+You should see a `dist` folder created in your package folder. Your folder structure should now look like this:
+
+```
+your_package_name
+├── dist
+│   ├── index.css
+│   ├── index.js
+│   └── index.js.map
+├── node_modules
+├── public
+├── src
+│   ├── components
+│   │   ├── index.js
+│   │   └── index.css
+│   ├── App.js
+│   ├── index.css
+│   ├── index.js
+├── .gitignore
+├── package-lock.json
+├── package.json
+└── README.md
+```
+
+Although, the `index.js.map` file is not required and therefore might not be created.
+
+You can now publish your package. To do so, you need to run the following command:
 
 ```
 npm publish
 ```
 
-### IV. Install your package
+You'll be prompt to authorize the browser to open an authentication page. Once you have authorized it, you should see a success message in
+your terminal. You can now check your package on NPM. To do so, you need to run the following command:
+
+```
+npm view your_package_name
+```
+
+You should see your package details displayed in your terminal.
+
+### V. Publish your package on GitHub
+
+Now that you have your package published on NPM, you can publish it on GitHub. To do so, you need to run the following commands:
+
+```
+git add .
+git commit -m "publish package"
+git push -u origin main
+```
+
+You should see your package published on GitHub.
+
+### VI. Install your package
 
 Now that you have your package published, you can install it in any other project. To do so, you need to run the following command:
 
@@ -139,7 +280,7 @@ Now that you have your package published, you can install it in any other projec
 npm install your_package_name
 ```
 
-### V. Import your package
+### VII. Import your package
 
 Now that you have your package installed, you can import it in any other project. To do so, you need to run the following command:
 
