@@ -1,0 +1,65 @@
+version: '3.9'
+services:
+    db:
+        image: postgres:15-alpine
+        container_name: Plausible-DB
+        hostname: plausible_db
+        security_opt:
+            - no-new-privileges:true
+        volumes:
+            - /volume1/docker/plausible/db:/var/lib/postgresql/data:rw
+        environment:
+            - POSTGRES_DB=plausible_db
+            - POSTGRES_PASSWORD=postgres
+        restart: on-failure:5
+
+    events-db:
+        image: clickhouse/clickhouse-server:23.6-alpine
+        ulimits:
+            nofile:
+                soft: 262144
+                hard: 262144
+        container_name: Plausible-EVENTS-DB
+        hostname: plausible_events_db
+        security_opt:
+            - no-new-privileges:true
+        user: 1026:100
+        volumes:
+            - /volume1/docker/plausible/data:/var/lib/clickhouse:rw
+            - /volume1/docker/plausible/logs:/var/log/clickhouse-server:rw
+        restart: on-failure:5
+
+    plausible:
+        image: plausible/analytics:latest
+        command:
+            sh -c "sleep 10 && /entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh db init-admin && /entrypoint.sh
+            run"
+        container_name: Plausible
+        hostname: plausible
+        security_opt:
+            - no-new-privileges:true
+        healthcheck:
+            test: wget --no-verbose --tries=1 --spider http://localhost:8000/ || exit 1
+        ports:
+            - 9850:8000
+        environment:
+            DISABLE_REGISTRATION: false # Type in true Instead of false to Disable Registration After Your Initial Registration.
+            BASE_URL: https://plausible.yourdomain.synology.me
+            SECRET_KEY_BASE: fE2Z9z9idAfGOHzl3fAz1x4/zneBI3oel9R38k8icc6Ttlm0ZtLp3MS5Gd6RNhPzKEFpe3DeeL6x2rMm/+WZLQ==
+            # MAILER_EMAIL: site@example.com
+            # If using GMAIL
+            # SMTP_HOST_ADDR: smtp.gmail.com
+            # SMTP_HOST_PORT: 587
+            # SMTP_USER_NAME: Your-own-gmail-address
+            # SMTP_USER_PWD: Your-own-app-password
+            # If using your Synology NAS
+            # SMTP_HOST_ADDR: smtp.yourdomainname.synology.me or smtp.yourdomainname.com
+            # SMTP_HOST_PORT: 587
+            # SMTP_USER_NAME: Your-own-email-address
+            # SMTP_USER_PWD: Your-own-email-password
+            GEONAMES_SOURCE_FILE: /etc/app/geonames.csv
+            IP_GEOLOCATION_DB: /etc/app/geolite2-city.mmdb
+        restart: on-failure:5
+        depends_on:
+            - db
+            - events-db

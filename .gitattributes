@@ -1,0 +1,5 @@
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.mmdb filter=lfs diff=lfs merge=lfs -text
+*.csv filter=lfs diff=lfs merge=lfs -text
+Docker/Plausible/geoip/geolite2-city.mmdb filter=lfs diff=lfs merge=lfs -text
+Docker/Plausible/geoip/geonames.csv filter=lfs diff=lfs merge=lfs -text
