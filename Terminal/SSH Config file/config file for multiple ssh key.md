@@ -62,3 +62,19 @@ If using GitLab, you'll might see a message like this:
 ```bash
 Welcome to GitLab, @yourusername!
 ```
+
+## One More Thing
+
+This config file will also work for any other connection using SSH. For example, if you want to connect to your server using SSH, you can
+add the following lines to the config file:
+
+```bash
+Host mypseudo myserver.com # the PSEUDO (mypseudo) you want to use for the ssh connection and the DOMAIN (myserver.com) called
+    HostName myserver.com # the DOMAIN (myserver.com) called
+    PreferredAuthentications publickey # using public key over password,
+    IdentityFile ~/.ssh/myserver/id_ed25519 # path to your private key (as explain in the other tutorial)
+    User myusername # username as for myusername@myserver
+    RequestTTY no # no pseudo-terminal allocation for myserver, otherwise you will get an allocation error
+    AddKeysToAgent yes # add the key to your ssh-agent, change to no if you don't want to add the key to your ssh-agent
+    UseKeychain no # use the keychain to store passphrase, change to yes if you want to use the keychain
+```
