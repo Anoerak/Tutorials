@@ -71,7 +71,7 @@ Hi yourusername! You've successfully authenticated, but GitHub does not provide 
 Welcome to GitLab, @yourusername!
 ```
 
-## Extra
+## One More Thing
 
 Additionally, you can change the setup of your actual repository to use SSH instead of HTTPS. This will allow you to push and pull without
 having to enter your password every time (if you have 2FA enabled).
