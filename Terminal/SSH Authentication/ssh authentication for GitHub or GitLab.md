@@ -70,3 +70,35 @@ Hi yourusername! You've successfully authenticated, but GitHub does not provide 
 ```bash
 Welcome to GitLab, @yourusername!
 ```
+
+## Extra
+
+Additionally, you can change the setup of your actual repository to use SSH instead of HTTPS. This will allow you to push and pull without
+having to enter your password every time (if you have 2FA enabled).
+
+1. Go to your repository on GitHub or GitLab.
+
+2. Click on the green Code button.
+
+3. Click on SSH.
+
+4. Copy the SSH link.
+
+5. Go to your terminal and navigate to the folder where is your repository.
+
+6. Type `git remote set-url origin <paste the SSH link here>`
+
+7. Type `git remote -v` to check if the link has been changed.
+
+8. Done! You can now push and pull without having to enter your password every time (if you have 2FA enabled).
+
+## Troubleshooting
+
+### Permission denied (publickey)
+
+If you get this error when trying to push or pull, you might need to add your SSH key to the ssh-agent again:
+
+```bash
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/github/id_ed25519
+```
