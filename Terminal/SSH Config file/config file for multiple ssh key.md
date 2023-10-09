@@ -36,8 +36,8 @@ Host github github.com # the PSEUDO (github) you want to use for the ssh connect
     IdentityFile ~/.ssh/github/id_ed25519 # path to your private key (as explain in the other tutorial)
     User git # username as for git@github.com or git@gitlab.com
     RequestTTY no # no pseudo-terminal allocation for GitHub and GitLab, otherwise you will get an allocation error
-	AddKeysToAgent yes # add the key to your ssh-agent, change to no if you don't want to add the key to your ssh-agent
-	UseKeychain no # use the keychain to store passphrase, change to yes if you want to use the keychain
+    AddKeysToAgent yes # add the key to your ssh-agent, change to no if you don't want to add the key to your ssh-agent
+    UseKeychain no # use the keychain to store passphrase, change to yes if you want to use the keychain
 ```
 
 ## Save the config file
