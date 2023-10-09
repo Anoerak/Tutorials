@@ -1,6 +1,6 @@
 # Reveal-md
 
-In this tutorial, we will learn how to use [reveal-md]('https://www.npmjs.com/package/reveal-md') to create a presentation using markdown.
+In this tutorial, we will learn how to use [reveal-md](https://www.npmjs.com/package/reveal-md) to create a presentation using markdown.
 
 ## Installation
 
@@ -17,6 +17,8 @@ Next, we need to create a markdown file. Let's call it `slide.md`. In this file,
 ```bash
 touch slide.md
 ```
+
+A template is available [here](https://github.com/Anoerak/Tutorials/blob/main/Terminal/Reveal-md/slide.md).
 
 ## Start the presentation
 
@@ -60,12 +62,29 @@ const myFunction = () => {
 ```
 ````
 
+## Add a code slide with highlighting
+
+To add a code slide with highlighting, we need to add the following to our markdown file:
+
+````markdown
+## My third slide
+
+```javascript [3]
+// We use a long function to showcase the highlighting feature
+const myFunction = () => {
+	console.log('Hello World');
+};
+
+myFunction();
+```
+````
+
 ## Add a list slide
 
 To add a list slide, we need to add the following to our markdown file:
 
 ```markdown
-## My third slide
+## My forth slide
 
 -   Item 1
 -   Item 2
@@ -77,7 +96,7 @@ To add a list slide, we need to add the following to our markdown file:
 To add a link slide, we need to add the following to our markdown file:
 
 ```markdown
-## My fourth slide
+## My fifth slide
 
 [Google](https://www.google.com)
 ```
@@ -87,7 +106,7 @@ To add a link slide, we need to add the following to our markdown file:
 To add a image slide, we need to add the following to our markdown file:
 
 ```markdown
-## My fifth slide
+## My sixth slide
 
 ![My Image](https://picsum.photos/200/300)
 ```
@@ -97,7 +116,7 @@ To add a image slide, we need to add the following to our markdown file:
 To add a video slide, we need to add the following to our markdown file:
 
 ```markdown
-## My sixth slide
+## My seventh slide
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/2G_mWfG0DZE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 ```
@@ -107,7 +126,7 @@ To add a video slide, we need to add the following to our markdown file:
 To add a slide with notes, we need to add the following to our markdown file:
 
 ```markdown
-## My seventh slide
+## My eight slide
 
 Note:
 
@@ -119,7 +138,7 @@ This is a note
 To add a slide with a table, we need to add the following to our markdown file:
 
 ```markdown
-## My eighth slide
+## My ninth slide
 
 | Name | Age |
 | ---- | --- |
