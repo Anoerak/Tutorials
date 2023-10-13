@@ -192,8 +192,16 @@ to ES5.
 First off, you need to modify your `build script` in the `scripts` field.  
 You need to add the following line (!! REPLACE <Your_Component_Folder> WITH THE NAME OF YOUR COMPONENT FOLDER !!):
 
+With bash:
+
 ```json
 "build": "SET NODE_ENV=production && rm -rf dist && mkdir dist && npx babel src/<Your_Component_Folder> --out-dir dist --copy-files"
+```
+
+With PowerShell:
+
+```json
+"build": "($env:NODE_ENV = 'production') -and (rm -r dist) -and (mkdir dist) -and (npx babel src/<Your_Component_Folder> --out-dir dist --copy-files)"
 ```
 
 Find the `private` field (should be the fourth line) and set it to `false` in order to be able to publish your package later on.  
@@ -280,6 +288,8 @@ Although the `index.js.map` file is not required and therefore might not be crea
 
 **!!!!! CHECK THE VERSION NUMBER IN YOUR PACKAGE.JSON FILE !!!!! YOU CANT PUBLISH A PACKAGE WITH A VERSION NUMBER THAT ALREADY EXISTS OR
 LOWER THAN THE PREVIOUS ONE !!!!!**
+
+**!!!!! ALSO, CHECK YOUR PACKAGE NAME !!!!! YOU CANT PUBLISH A PACKAGE WITH A NAME THAT ALREADY EXISTS !!!!!**
 
 You can now publish your package.  
 To do so, you need to run the following command:
