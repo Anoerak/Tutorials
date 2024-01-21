@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
+/*
+|------------------------------------------
+| Basic Styles
+|------------------------------------------
+*/
+body {
+	background-color: #000;
+	color: #fff;
+	font-family: 'Roboto Slab', sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	width: fit-content;
+	font-size: 3rem;
+	font-weight: 900;
+	margin: 2rem auto;
+}
+
+#section-1 {
+	margin: 50% 20%;
+}
+
+#section-2 {
+	margin-top: 10rem;
+	height: 100vh;
+}
+
+h2 {
+	font-size: 2.5rem;
+	font-weight: 900;
+	margin: 0;
+}
+
+p {
+	font-size: 1.5rem;
+	font-weight: 100;
+	margin: 0;
+}
+
+/* Hide the scrollbar */
+body::-webkit-scrollbar {
+	display: none;
+}
+
+
+/*
+|------------------------------------------
+| Here starts the magic
+|------------------------------------------
+*/
+
+/* We select the span within the h2 and p
+   in order to apply the effect only to the
+   text and not to the whole element */
+.scroll__reveal__effect span {
+	/* 
+		We set the text color slightly brighter
+	   	than the background color 
+	*/
+	color: hsla(0, 0%, 100%, 0.1);
+	/* 
+		We select the text only  
+	*/
+	background-clip: text;
+	/* 
+		We don't want the background to repeat
+	   	itself, we want it to cover the whole
+	   	text
+	  */
+	background-repeat: no-repeat;
+	/* 
+		We want the background to be fixed
+	   	so it doesn't move when we scroll
+	  */
+	background-size: 0% 100%;
+	/* 
+		We set the "revealed"  text color to be  
+		the same as the body text color
+	  */
+	background-image: linear-gradient(90deg, white, white);
+	/* 
+		We setup the animation to start to be linear
+		(we want the text to be revealed at the same
+		speed from start to end) and to be forwards
+		(we want the text to stay revealed after the
+		animation ends).
+	 */
+	animation: scroll-reveal-effect linear forwards;
+	/*  
+		We use the animation-timeline property to
+		apply the animation only when the element
+		is in the viewport (careful, this property
+		is not supported by all browsers, check
+		the compatibility table on MDN
+		https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline)
+	*/
+	animation-timeline: view();
+}
+
+/*
+	We set the animation to start at 60vh
+	(60% of the viewport height) and to end
+	at 70vh (70% of the viewport height).
+*/
+.scroll__reveal__effect h2 span {
+	animation-range-start: cover 60vh;
+	animation-range-end: cover 70vh;
+}
+
+/* 
+	We set the animation to start at 60vh
+	(60% of the viewport height) and to end
+	at 100vh (100% of the viewport height).
+	We use the same starting point as the h2 
+	because the h2 animation is gonna last for 
+	10vh (70vh - 60vh = 10vh) and we want the
+	p animation to start when the h2 animation
+	ends.
+ */
+.scroll__reveal__effect p span {
+	animation-range-start: cover 60vh;
+	animation-range-end: cover 100vh;
+}
+
+/* 
+	Here we define the animation itself.
+	We set the background-size to 100% 100%
+	so the background covers the whole text
+	when the animation ends.
+ */
+@keyframes scroll-reveal-effect {
+	to {
+		background-size: 100% 100%;
+	}
+}
