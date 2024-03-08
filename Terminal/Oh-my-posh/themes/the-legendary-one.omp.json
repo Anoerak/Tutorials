@@ -20,13 +20,19 @@
       "segments": [
         {
           "type": "project",
-          "foreground": "#5EADF2",
+          "foreground": "#95fde4",
           "style": "plain",
-          "template": " {{if .Version}}\uf072 Project: {{.Name}} \uf487 {{.Version}}, {{end}}"
+          "template": "{{if .Version}} \uf072 Project:{{end}}"
+        },
+        {
+          "type": "project",
+          "foreground": "#b017fc",
+          "style": "plain",
+          "template": "{{if .Version}} {{.Name}} \uf487 {{.Version}}, {{end}}"
         },
         {
           "type": "node",
-          "foreground": "#44FFD2",
+          "foreground": "#70e466",
           "properties": {
             "fetch_version": true
           },
@@ -35,7 +41,7 @@
         },
         {
           "type": "npm",
-          "foreground": "#FE4A49",
+          "foreground": "#ff0505",
           "style": "plain",
           "template": "npm \ue71e {{.Full}} "
         }
@@ -54,25 +60,25 @@
         },
         {
           "type": "php",
-          "foreground": "#ffffff",
+          "foreground": "#a4b6fc",
           "style": "plain",
           "template": "{{if .Full}} PHP  {{ .Full }}{{end}} |"
         },
         {
           "type": "react",
-          "foreground": "#81a1c1",
+          "foreground": "#3ce2ff",
           "style": "plain",
           "template": "{{if .Full}} React  {{ .Full }}{{end}} |"
         },
         {
           "type": "swift",
-          "foreground": "#ffffff",
+          "foreground": "#fa5b3e",
           "style": "plain",
           "template": "{{if .Full}} Swift  {{ .Full }}{{end}} |"
         },
         {
           "type": "docker",
-          "foreground": "#0B59E7",
+          "foreground": "#0055ff",
           "style": "plain",
           "template": "{{if .Context}} Docker  {{ .Context }}{{end}}"
         }
@@ -85,7 +91,7 @@
       "segments": [
         {
           "type": "path",
-          "foreground": "#15C2CB",
+          "foreground": "#00ceaf",
           "properties": {
             "style": "folder"
           },
