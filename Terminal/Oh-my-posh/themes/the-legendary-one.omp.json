@@ -102,10 +102,21 @@
           "type": "git",
           "foreground": "#F141A8",
           "properties": {
-            "branch_icon": "\ue0a0 "
+            "branch_icon": "\ue0a0 ",
+            "fetch_status": true,
+            "fetch_upstream_icon": true,
+            "untracked_modes": {
+              "/Users/user/Projects/oh-my-posh/": "no"
+            }
           },
-          "style": "plain",
-          "template": "<#F3EFF5>on</> {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }} "
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ff8181{{ end }}",
+            "{{ if gt .Ahead 0 }}#B388FF{{ end }}",
+            "{{ if gt .Behind 0 }}#B388FB{{ end }}"
+          ],
+          "template": "<#F3EFF5>on </>{{ .HEAD }}{{if .BranchStatus }}, Branch is {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}, \uf044 {{ .Working.String }} files modified{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}, \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }},  Stashed {{ .StashCount }}{{ end }}",
+          "style": "plain"
         }
       ],
       "type": "prompt"
