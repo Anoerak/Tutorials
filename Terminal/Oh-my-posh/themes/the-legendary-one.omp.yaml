@@ -1,0 +1,131 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+final_space: true
+version: 2
+blocks:
+# PROMPT ESCAPE
+  - type: prompt
+    alignment: left
+    segments:
+      - type: text
+        style: plain
+        foreground: "#ff5e5e"
+        template: "\ue621"
+    newline: true
+# SYSTEM
+  - type: prompt
+    alignment: left
+    segments:
+      - type: text
+        style: plain
+        foreground: "#fdef95"
+        template: " \uf109 System: "
+      - type: os
+        style: plain
+        foreground: "{{ if eq .Icon \"\uF179\" }}#ff5e5e{{ else }}#00A4EF{{ end }}"
+        template: "{{if .Icon}}{{ .Icon }}{{end}} - "
+        properties:
+          macos: "\uF179 mac"
+          linux: "\uF17C\ linux"
+          windows: "\uE62A\ windows"
+      - type: node
+        style: plain
+        foreground: "#70e466"
+        template: "node \ue718 {{ .Full }}, "
+        properties:
+          display_mode: always
+          fetch_version: true
+      - type: npm
+        style: plain
+        foreground: "#ff0505"
+        template: "npm \ue71e {{.Full}}, "
+        properties:
+          display_mode: always
+          fetch_version: true
+      - type: php
+        style: plain
+        foreground: "#a4b6fc"
+        template: "php \ue73d {{.Full}} "
+        properties:
+          display_mode: always
+          fetch_version: true
+    newline: true
+# PROJECT
+  - type: prompt
+    alignment: left
+    segments:
+      - type: project
+        style: plain
+        foreground: "#95fde4"
+        template: "{{ if .Version }} \uf072 Project:{{ else }} \uf072 Project: no name{{end}}"
+      - type: project
+        style: plain
+        foreground: "#b017fc"
+        template: "{{if .Version}} {{.Name}} \uf487 {{.Version}}, {{else}} no version found{{end}}"
+    newline: true
+# STACK
+  - type: prompt
+    alignment: left
+    segments:
+      - type: project
+        style: plain
+        foreground: "#33FFB7"
+        template: "{{if .Version}} \uf51e Stack:{{ else }} \uf51e Stack: no composer.json or package.json{{end}}"
+      - type: php
+        style: plain
+        foreground: "#a4b6fc"
+        template: "{{if .Segments.Project.Version}}{{if .Full}} PHP \ue73d {{ .Full }} |{{end}}{{end}}"
+      - type: react
+        style: plain
+        foreground: "#3ce2ff"
+        template: "{{if .Segments.Project.Version}}{{if .Full}} React \ue7ba {{ .Full }} |{{end}}{{end}}"
+      - type: swift
+        style: plain
+        foreground: "#fa5b3e"
+        template: "{{if .Segments.Project.Version}}{{if .Full}} Swift \ue755 {{ .Full }} |{{end}}{{end}}"
+      - type: docker
+        style: plain
+        foreground: "#0055ff"
+        properties:
+          display_mode: files
+        template: "{{if .Segments.Project.Version}}{{if .Context}} Docker \uf308 {{ .Context }}{{end}}{{end}}"
+    newline: true
+# GIT
+  - type: prompt
+    alignment: left
+    segments:
+      - type: path
+        style: plain
+        foreground: "#00ceaf"
+        template: " \ue5fb {{ .Path }} "
+        properties:
+          style: folder
+      - type: git
+        style: plain
+        foreground: "#F141A8"
+        foreground_templates:
+          - "{{ if or (.Working.Changed) (.Staging.Changed) }}{{ end }}"
+          - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ffffff{{ end }}"
+          - "{{ if gt .Ahead 0 }}#ffffff{{ end }}"
+          - "{{ if gt .Behind 0 }}#ffffff{{ end }}"
+        background_templates:
+          - "{{ if or (.Working.Changed) (.Staging.Changed) }}{{ end }}"
+          - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ff8181{{ end }}"
+          - "{{ if gt .Ahead 0 }}#B388FF{{ end }}"
+          - "{{ if gt .Behind 0 }}#B388FB{{ end }}"
+        template: "<#F3EFF5>on</> {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}, \uf044 files {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}, \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}, \uf0c7 Stashed {{ .StashCount }}{{ end }}"
+        properties:
+          branch_icon: "\ue0a0 "
+          fetch_status: true
+          fetch_upstream_icon: true
+          untracked_modes:
+            "/Users/user/Projects/oh-my-posh/": "no"
+    newline: true
+# PROMPT
+  - type: prompt
+    alignment: left
+    segments:
+      - type: text
+        style: plain
+        foreground: "#FFE45E"
+        template: "\u276f "
+    newline: true
