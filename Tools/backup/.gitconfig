@@ -1,0 +1,12 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Sébastien Proust
+	email = sp@dynamicsource.se
+[core]
+	excludesfile = /Users/sebastien/.gitignore_global
+	autocrlf = input
+[safe]
+	directory = /Users/sebastien/Documents/Repositories/JAWS_Project/jaws
+[rerere]
+	enabled = false

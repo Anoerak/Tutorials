@@ -1,0 +1,7 @@
+{
+  "hosts": {
+    "https://phab.dynamicsource.se/api/": {
+      "token": "cli-pbp3q5bs45aq2h6rnfx26popj4sf"
+    }
+  }
+}
