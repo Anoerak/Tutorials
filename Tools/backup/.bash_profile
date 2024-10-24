@@ -151,6 +151,9 @@ alias dock-c-u="docker-compose up"
 alias dock-c-d="docker-compose down"
 alias dock-c-r="docker-compose restart"
 alias dock-connect="docker exec -it"
+alias dock-cache="docker system df"
+alias dock-clean-d="docker container prune -f"
+alias dock-clean="docker container prune -f && docker image prune -f && docker volume prune -f && docker network prune -f"
 alias dock-ps="docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Image}}'"
 
 
@@ -232,11 +235,41 @@ alias gmove='function _gmove(){ git push origin origin/$1:refs/heads/$2 :$1; }; 
 # ----------------------
 # JAWS functions
 # ----------------------
+# jdunit will launch a basic phpunit test without the configuration file, using colors and testdox
+# $1 is the container name
+# $2 is the path to the test file
 jdunit() {
     docker exec -it "$1" vendor/bin/phpunit --colors --testdox "$2"
 }
+# jdunitcov will launch a phpunit test with the configuration file, using colors and testdox
+# $1 is the container name
+# $2 is the path to the configuration file
 jdunitcov() {
     docker exec -it "$1" vendor/bin/phpunit --colors --testdox --configuration "$2"
+}
+# jpsalm will launch a psalm test with the configuration file
+# $1 is the container name
+# $2 is the path to the configuration file
+jpsalm() {
+    docker exec -it "$1" vendor/bin/psalm --config="$2"
+}
+# jpsalm-a will launch a psalm test with the default configuration file
+# $1 is the container name
+jpsalm-a() {
+    docker exec -it "$1" vendor/bin/psalm
+}
+# jpsalm-l will launch a psalm test with the error level
+# $1 is the container name
+# $2 is the error level
+jpsalm-l() {
+    docker exec -it "$1" vendor/bin/psalm --error-level="$2"
+}
+# jpsalm-r will launch a psalm test with the report
+# $1 is the container name
+# $2 is the report, it can be json, xml, text, emacs, github, compact, codeclimate, checkstyle, junit
+# and can be saved outside the container like this: jpsalm-r container_name json > report.json
+jpsalm-r() {
+    docker exec -it "$1" vendor/bin/psalm --report="$2"
 }
 
 # ----------------------
